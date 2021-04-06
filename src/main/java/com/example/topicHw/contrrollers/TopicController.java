@@ -21,19 +21,17 @@ public class TopicController {
     public List<Topic> GetTopic() {
         return topicServiceImp.getAll();
     }
-    @GetMapping("/topic/name={name}")
-    public List<Topic>  getTopicByName(@PathVariable("name") String name) {
-        System.out.println(name);
+    @GetMapping("/topic/name/{name}")
+
+    public Topic  getTopicByName(@PathVariable("name") String name) {
         return  topicServiceImp.getByName(name);
     }
-    @GetMapping("/topic/theme={theme}")
+    @GetMapping("/topic/theme/{theme}")
     public List<Topic>  getTopicByTheme(@PathVariable("theme") String theme) {
-        System.out.println(theme);
         return  topicServiceImp.getByTheme(theme);
     }
     @GetMapping("/topic/order/")
     public List<Topic> getOrdered(@RequestParam boolean order) {
-        System.out.println(order);
         if(order){
             List<Topic> t = new ArrayList<>(topicServiceImp.getAll()) ;
             t.sort(Comparator.comparing(Topic::getDate));
